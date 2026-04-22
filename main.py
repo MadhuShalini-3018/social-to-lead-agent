@@ -1,18 +1,19 @@
 import json
 
-# Load knowledge base (RAG Data)
+# Load knowledge base (RAG)
 with open("rag_data.json", "r") as file:
     data = json.load(file)
 
 # Mock Lead Capture Function
 def mock_lead_capture(name, email, platform):
+
     print("\n===== LEAD CAPTURED SUCCESSFULLY =====")
     print(f"Name: {name}")
     print(f"Email: {email}")
     print(f"Platform: {platform}")
     print("======================================")
 
-# Intent Detection Function
+# Intent Detection
 def detect_intent(user_input):
 
     user_input = user_input.lower()
@@ -56,11 +57,11 @@ def detect_intent(user_input):
     elif any(word in user_input for word in high_intent):
         return "high_intent"
 
-    # Unknown
+    # Unknown Intent
     else:
         return "unknown"
 
-# RAG-Based Response
+# RAG-Based Answers
 def answer_query():
 
     print("\n===== AUTOSTREAM PLANS =====\n")
@@ -72,6 +73,7 @@ def answer_query():
     print(data["plans"]["pro"])
 
     print("\n===== COMPANY POLICIES =====")
+
     print("Refund Policy:")
     print(data["policies"]["refund"])
 
@@ -80,12 +82,13 @@ def answer_query():
 
     print()
 
-# Main Chatbot Function
+# Main Chatbot
 def chatbot():
 
     print("===================================")
-    print("     AutoStream AI Assistant")
+    print("      AutoStream AI Assistant")
     print("===================================")
+
     print("Bot: Hello! Welcome to AutoStream.")
     print("Bot: Ask me about pricing, plans, or features.\n")
 
@@ -100,12 +103,12 @@ def chatbot():
 
             print("\nBot: Hi! How can I help you today?\n")
 
-        # Inquiry
+        # Product / Pricing Inquiry
         elif intent == "inquiry":
 
             answer_query()
 
-        # High Intent
+        # High Intent Lead
         elif intent == "high_intent":
 
             print("\nBot: Great! You seem interested in our Pro Plan.")
@@ -123,11 +126,11 @@ def chatbot():
 
             break
 
-        # Unknown Input
+        # Unknown Queries
         else:
 
             print("\nBot: Sorry, I didn't understand that.")
             print("Bot: Please ask about pricing or plans.\n")
 
-# Run the chatbot
+# Run chatbot
 chatbot()
