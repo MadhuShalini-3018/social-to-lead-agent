@@ -13,7 +13,7 @@ def mock_lead_capture(name, email, platform):
     print(f"Platform: {platform}")
     print("======================================")
 
-# Intent Detection
+# Intent Detection Function
 def detect_intent(user_input):
 
     user_input = user_input.lower()
@@ -49,19 +49,19 @@ def detect_intent(user_input):
     if any(word in user_input for word in greetings):
         return "greeting"
 
+    # High Intent FIRST
+    elif any(word in user_input for word in high_intent):
+        return "high_intent"
+
     # Inquiry Intent
     elif any(word in user_input for word in inquiry):
         return "inquiry"
-
-    # High Intent
-    elif any(word in user_input for word in high_intent):
-        return "high_intent"
 
     # Unknown Intent
     else:
         return "unknown"
 
-# RAG-Based Answers
+# RAG-Based Answer Function
 def answer_query():
 
     print("\n===== AUTOSTREAM PLANS =====\n")
@@ -82,7 +82,7 @@ def answer_query():
 
     print()
 
-# Main Chatbot
+# Main Chatbot Function
 def chatbot():
 
     print("===================================")
@@ -103,12 +103,7 @@ def chatbot():
 
             print("\nBot: Hi! How can I help you today?\n")
 
-        # Product / Pricing Inquiry
-        elif intent == "inquiry":
-
-            answer_query()
-
-        # High Intent Lead
+        # High Intent
         elif intent == "high_intent":
 
             print("\nBot: Great! You seem interested in our Pro Plan.")
@@ -126,11 +121,16 @@ def chatbot():
 
             break
 
-        # Unknown Queries
+        # Inquiry
+        elif intent == "inquiry":
+
+            answer_query()
+
+        # Unknown Query
         else:
 
             print("\nBot: Sorry, I didn't understand that.")
             print("Bot: Please ask about pricing or plans.\n")
 
-# Run chatbot
+# Run Chatbot
 chatbot()
