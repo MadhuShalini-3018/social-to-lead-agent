@@ -1,10 +1,10 @@
 import json
 
-# Load knowledge base (RAG)
+# Load knowledge base
 with open("rag_data.json", "r") as file:
     data = json.load(file)
 
-# Mock Lead Capture Function
+# Mock Lead Capture
 def mock_lead_capture(name, email, platform):
 
     print("\n===== LEAD CAPTURED SUCCESSFULLY =====")
@@ -13,55 +13,45 @@ def mock_lead_capture(name, email, platform):
     print(f"Platform: {platform}")
     print("======================================")
 
-# Intent Detection Function
+# Intent Detection
 def detect_intent(user_input):
 
     user_input = user_input.lower()
 
-    greetings = [
-        "hi",
-        "hello",
-        "hey"
-    ]
-
-    inquiry = [
-        "price",
-        "pricing",
-        "plan",
-        "plans",
-        "feature",
-        "features",
-        "refund",
-        "support"
-    ]
-
-    high_intent = [
-        "buy",
-        "purchase",
-        "subscribe",
-        "sign up",
-        "i want",
-        "want pro",
-        "interested"
-    ]
-
-    # Greeting Intent
-    if any(word in user_input for word in greetings):
-        return "greeting"
-
-    # High Intent FIRST
-    elif any(word in user_input for word in high_intent):
+    # HIGH INTENT FIRST
+    if (
+        "i want" in user_input
+        or "buy" in user_input
+        or "subscribe" in user_input
+        or "want pro" in user_input
+        or "purchase" in user_input
+    ):
         return "high_intent"
 
-    # Inquiry Intent
-    elif any(word in user_input for word in inquiry):
+    # Greeting
+    elif (
+        "hi" in user_input
+        or "hello" in user_input
+        or "hey" in user_input
+    ):
+        return "greeting"
+
+    # Inquiry
+    elif (
+        "price" in user_input
+        or "pricing" in user_input
+        or "plan" in user_input
+        or "plans" in user_input
+        or "feature" in user_input
+        or "support" in user_input
+        or "refund" in user_input
+    ):
         return "inquiry"
 
-    # Unknown Intent
     else:
         return "unknown"
 
-# RAG-Based Answer Function
+# RAG Answer
 def answer_query():
 
     print("\n===== AUTOSTREAM PLANS =====\n")
@@ -82,7 +72,7 @@ def answer_query():
 
     print()
 
-# Main Chatbot Function
+# Main Chatbot
 def chatbot():
 
     print("===================================")
@@ -103,7 +93,7 @@ def chatbot():
 
             print("\nBot: Hi! How can I help you today?\n")
 
-        # High Intent
+        # HIGH INTENT
         elif intent == "high_intent":
 
             print("\nBot: Great! You seem interested in our Pro Plan.")
@@ -113,7 +103,6 @@ def chatbot():
             email = input("Enter your email: ")
             platform = input("Enter your creator platform: ")
 
-            # Tool Execution
             mock_lead_capture(name, email, platform)
 
             print("\nBot: Thank you!")
@@ -126,11 +115,11 @@ def chatbot():
 
             answer_query()
 
-        # Unknown Query
+        # Unknown
         else:
 
             print("\nBot: Sorry, I didn't understand that.")
             print("Bot: Please ask about pricing or plans.\n")
 
-# Run Chatbot
+# Run chatbot
 chatbot()
