@@ -1,2 +1,5 @@
-# social-to-lead-agent
-GenAI conversational agent with RAG, intent detection, and lead capture for a SaaS product
+# Social to Lead Agent
+
+## How to run
+```bash
+python main.py
